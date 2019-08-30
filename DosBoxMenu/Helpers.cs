@@ -1,6 +1,6 @@
 // *********************************************************************************
 // Title:		Helpers.cs
-// Description:	Clase que contiene funciones importadas de Win32 para distintas cosas
+// Description:	Class that has functions imported from Win32 for file and message handling.
 // *********************************************************************************
 
 using System;
@@ -32,7 +32,7 @@ namespace DosBoxMenu3
 
         #region Wrappers
 
-        // Retorna el path corto para DOS
+        // Returns short path for DOS.
         public static string ToShortPathName(string sLongName)
         {
             StringBuilder sShortNameBuffer = new StringBuilder(256);

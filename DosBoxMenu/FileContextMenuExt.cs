@@ -20,6 +20,7 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Collections.Generic;
 using DosBoxMenu3.Properties;
 using System.Drawing;
 using DosBoxMenu3;
@@ -43,6 +44,8 @@ namespace CSShellExtContextMenuHandler
         private string verbCanonicalName = "CRunInDosBox";
         private string verbHelpText = "Run in DosBox";
         private uint IDM_DISPLAY = 0;
+
+        private static List<string> supportedExtensions = new List<string>(new string[] { ".exe", ".bat", ".com" });
 
         public FileContextMenuExt()
         {
@@ -108,10 +111,11 @@ namespace CSShellExtContextMenuHandler
         {
             try
             {
-                ShellExtReg.RegisterShellExtContextMenuHandler(t.GUID, ".exe", 
-                    "DosBoxMenu.FileContextMenuExt Class");
-                ShellExtReg.RegisterShellExtContextMenuHandler(t.GUID, ".bat",
-                    "DosBoxMenu.FileContextMenuExt Class");
+                foreach (string extension in supportedExtensions)
+                {
+                    ShellExtReg.RegisterShellExtContextMenuHandler(t.GUID, extension,
+                        "DosBoxMenu.FileContextMenuExt Class");
+                }
             }
             catch (Exception ex)
             {
@@ -125,8 +129,10 @@ namespace CSShellExtContextMenuHandler
         {
             try
             {
-                ShellExtReg.UnregisterShellExtContextMenuHandler(t.GUID, ".exe");
-                ShellExtReg.UnregisterShellExtContextMenuHandler(t.GUID, ".bat");
+                foreach (string extension in supportedExtensions)
+                {
+                    ShellExtReg.UnregisterShellExtContextMenuHandler(t.GUID, extension);
+                }
             }
             catch (Exception ex)
             {

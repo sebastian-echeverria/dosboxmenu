@@ -16,11 +16,12 @@ namespace DosBoxMenu3
         #region Atributos
 
         // Ruta de DOSBOX
-        protected string m_sDosBoxPath = "C:\\Program Files (x86)\\DOSBox-0.74\\dosbox.exe";
-        protected string m_sDosBoxPathFile = "C:\\dosboxpath.txt";
+        protected static string DEFAULT_PATH = "C:\\Program Files (x86)\\DOSBox-0.74\\dosbox.exe";
+        protected static string PATH_FILE = "C:\\dosboxpath.txt";
+
+        protected string m_sDosBoxPath;
 
         public string m_sFileName;
-        public string m_sFolder;
 
         #endregion
 
@@ -29,29 +30,33 @@ namespace DosBoxMenu3
         //*******************************************************************************
         // Loads the path from a specific file
         //*******************************************************************************
-        public void loadDosBoxPath()
+        private void LoadDosBoxPath()
         {
             // If path config exists, load it
-            if(File.Exists(m_sDosBoxPathFile))
+            if(File.Exists(PATH_FILE))
             {
-                FileStream fs = new FileStream(m_sDosBoxPathFile, FileMode.Open);
+                FileStream fs = new FileStream(PATH_FILE, FileMode.Open);
                 StreamReader sr = new StreamReader(fs);
                 
                 // Obtenemos y almacenamos ruta
                 String sDBPath = sr.ReadLine();
                 if (sDBPath != "")
-                    m_sDosBoxPath = sDBPath;
+                    SetDosBoxPath(sDBPath);
 
                 // Cerramos
                 sr.Close();
                 fs.Close();
+            }
+            else
+            {
+                SetDosBoxPath(DEFAULT_PATH);
             }
         }
 
         //*******************************************************************************
         // Sets the path to the DosBox executable
         //*******************************************************************************
-        public void setDosBoxPath(string sPath)
+        public void SetDosBoxPath(string sPath)
         {
             m_sDosBoxPath = sPath;
         }
@@ -61,7 +66,7 @@ namespace DosBoxMenu3
         //*******************************************************************************
         public void RunInDosBox(bool fullscreen)
         {
-            loadDosBoxPath();
+            LoadDosBoxPath();
 
             string sCurrFolder = Path.GetDirectoryName(m_sFileName);
 
@@ -79,7 +84,7 @@ namespace DosBoxMenu3
         //*******************************************************************************
         public void CreateBatFile(bool bFullscreen)
         {
-            loadDosBoxPath();
+            LoadDosBoxPath();
 
             // Obtenemos datos del archivo y comando
             string sFilenameOnly = Path.GetFileNameWithoutExtension(m_sFileName);
