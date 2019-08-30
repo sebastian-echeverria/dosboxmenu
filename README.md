@@ -1,5 +1,11 @@
 # dosboxmenu
-A Windows right-menu extension to quickly launch programs in DosBox from the File Explorer
+A Windows right-menu extension to quickly launch programs in DosBox from the File Explorer.
+
+The extension automatically adds a menu item for files with certain file extension. Currently, the file
+extensions supported are .exe, .bat and .com.
+
+The menu item that is added is called "Run in DosBox", and simply starts DosBox on that folder, executing
+that file inside it.
 
 To register:
 1. Build DLL
