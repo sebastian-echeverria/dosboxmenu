@@ -95,6 +95,10 @@
     <Compile Include="ShellExtLib.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dist\register.bat" />
+    <None Include="dist\unregister.bat" />
+    <None Include="dist\un_and_reregister.bat" />
+    <None Include="VERSION" />
     <None Include="OK.bmp" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
