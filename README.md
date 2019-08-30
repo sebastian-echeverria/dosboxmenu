@@ -13,3 +13,11 @@ To unregister:
 1. Start a command prompt as an Administrator
 2. Change to the folder where the extension was registered from
 3. Run "unregister.bat"
+
+The extension currently assumes that the path of the DosBox executable is:
+
+"C:\\Program Files (x86)\\DOSBox-0.74\\dosbox.exe"
+
+If the executable is in a different path, write the full path to the file in an otherwise empty text file,
+and store it as C:\dosboxpath.txt. The extension will automatically use the path found in that file instead.
+Please use \\ instead of \ when writing the path to that file.
