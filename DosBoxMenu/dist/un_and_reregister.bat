@@ -1,3 +1,4 @@
-C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\regasm %CD%\DosBoxMenu.dll /unregister
-C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\regasm %CD%\DosBoxMenu.dll /codebase
+for /f %%a in ('dir %windir%\Microsoft.Net\Framework64\regasm.exe /s /b') do set currentRegasm="%%a"
+%currentRegasm% %CD%\DosBoxMenu.dll /unregister
+%currentRegasm% %CD%\DosBoxMenu.dll /codebase
 pause
